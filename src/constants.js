@@ -1,0 +1,17 @@
+export const SEARCH = 'SEARCH';
+export const FETCH_TRAILER = 'SEARCH_TRAILER';
+export const FETCH_FAILED = 'FETCHED_FAILED';
+export const BEGIN_FETCH = 'BEGIN_FETCH';
+export const FETCHED_SERIES= 'FETCHED_SERIES';
+export const FETCHED_MOVIES = 'FETCHED_MOVIES';
+export const OVERVIEW_MOVIE = 'OVERVIEW_MOVIE';
+export const OVERVIEW_SERIE = 'OVERVIEW_SERIE';
+export const MOVIE_SUGGESTION = 'MOVIE_SUGGESTION';
+export const SERIE_SEGGESTION = 'SERIE_SEGGESTION';
+export const MOVIE_CREDITS = 'MOVIE_CREDITS';
+export const SERIE_CREDITS = 'SERIE_CREDITS';
+export const CAST_MOVIE = 'CAST_MOVIE';
+export const CAST_SERIE = 'CAST_SERIE';
+export const NOW_UPCOMING_MOVIE = 'NOW_UPCOMING_MOVIE';
+export const PEOPLE = 'PEOPLE';
+

@@ -1,0 +1,238 @@
+@import '~antd/dist/antd.css';
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none !important;
+}
+
+iframe {
+  border: none;
+}
+
+.main-content {
+  background-color: white;
+  margin-left: 80px;
+}
+
+.title {
+  margin : 2rem;
+}
+
+/*Header*/
+
+.header{
+  background-color: #F0F2F5;
+  font-size: 3rem; 
+  color: #001529;
+  font-weight: 600;
+  padding: 1rem 1.5rem !important;
+  text-transform: uppercase;
+}
+
+/*Logo*/
+.logo {
+  max-width: 100%;
+  padding: 15px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #002140;
+  
+}
+
+.logo img{
+  margin: 0 auto;
+  max-width: 75%;
+  fill: rgb(240, 240, 240);
+}
+
+.name{
+  margin-top: 15px;
+  font-size: 17px;
+  color: rgb(252, 252, 252);
+  font-weight: 500;
+}
+
+.name-hide{
+  display: none;
+}
+
+/*
+  Display Item 
+*/
+
+.item-wrapper {
+  margin: 1rem 0.5rem;
+}
+
+/*
+  Overview
+*/
+
+.overview {
+  min-height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.overview-media {
+  position: relative;
+  padding: 0.8rem;
+  min-height: 100%;
+  width : 35%;
+  text-align: center;
+}
+.overview-description {
+  position: relative;
+  padding: 1rem;
+  margin-left: 1rem;
+  max-height: 100%;
+  width: 55%;
+}
+
+.overview-image {
+  margin: 0 auto;
+  width: 95%;
+}
+
+.ant-card-cover{
+  overflow: hidden;
+}
+
+.ant-carousel .slick-slide {
+  line-height: normal !important;
+  text-align: left !important;
+  height: 85vh;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+.ant-carousel .slick-dots {
+  bottom: 20px;
+}
+
+.ant-carousel .slick-dots li button{
+  height: 4px;
+  opacity: 0.6;
+}
+/*
+marginBottom : 10, color : '#fff', textTransform : 'uppercase', lineHeight : 'none', textShadow : '1px 0px 80px rgba(0, 0, 0, 1)'*/
+.caresoul-title {
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
+  font-size: 4rem;
+  line-height: normal;
+}
+
+
+.filter:hover {
+  background-color : rgb(27, 26, 26);
+  color: white;
+}
+
+.overview-button {
+  padding: 0.4rem 0.5rem;
+  text-transform: uppercase;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border: none;
+  font-size: 1.5rem;
+  color: rgba(5, 17, 31, 1);
+  box-shadow: 1px 0px 80px rgba(0, 0, 0, 1);
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.overview-button:hover{
+  background-color: rgba(5, 17, 31, 0.71);
+  color: rgb(255, 255, 255);
+  box-shadow: 1px 0px 80px rgba(255, 255, 255, 0.793);
+}
+
+/*
+  now playing
+*/
+
+.upcoming-list { 
+  margin: 1rem 0;
+}
+.upcoming-container {
+  margin: 0 auto;
+  width: 90%;
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 0px 10px #0000007d;
+  display: flex;
+  justify-content: space-between;
+}
+
+.upcoming-desc {
+  width: 65%;
+}
+.upcoming-image-container {
+  width: 30%
+}
+.upcoming-image {
+  max-width: 100%;
+}
+
+
+@media screen and (max-width: 2160px) {
+  .main-content {
+    margin : 0 auto;
+    max-width: 260px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+
+  .ant-carousel .slick-slide {
+    line-height: 0;
+    height: auto;
+  }
+
+  
+  .caresoul-title {
+    font-size: 2.5rem;
+  }
+  
+}
+
+@media screen and (max-width: 900px) {
+  .item-wrapper {
+    margin: 1rem 0.2rem;
+  }
+
+  .ant-carousel .slick-slide {
+    text-align: center;
+    height: auto;
+  }
+  .caresoul-title {
+    font-size: 2rem;
+  }
+  .overview-button{
+    font-size: 1rem;
+  }
+}
+
+
+@media screen and (max-width: 700px) {
+  .caresoul-title {
+    font-size: 1.5rem;
+  }
+  .overview-button{
+    font-size: 0.8rem;
+  }
+}
+
