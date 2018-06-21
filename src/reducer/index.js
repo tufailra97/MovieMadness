@@ -8,6 +8,6 @@ import search from './reducerSearch';
 export default combineReducers({
   movies : searchMovie,
   series : searchSerie,
+  people : searchPeople,
   search : search,
-  people : searchPeople
 });

@@ -10,11 +10,12 @@ import { Layout } from 'antd';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 
 import './App.css';
 import OverviewSeries from './pages/OverviewSeries';
+import OverviewPerson from './pages/OverviewPerson';
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route path='/search' component = {Search}/>
               <Route path='/overview/:item' component = {Overview}/> 
               <Route path='/overviewSerie' component = {OverviewSeries} />
+              <Route path='/overviewPerson' component = {OverviewPerson} />
               <Route path='*'  component = {ErrorPage}/>
             </Switch>
           </Layout>

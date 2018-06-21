@@ -7,7 +7,7 @@ class Cast extends Component{
     const { image, character, name, comma } = this.props;
     const cast = (
       <div style = {{maxWidth : 185}}>
-        <img src = {'https://image.tmdb.org/t/p/w185/' + image}  style = {{width : 185, height : 'auto'}}/>
+        <img src = {'https://image.tmdb.org/t/p/w185/' + image}  style = {{width : 185, height : 'auto'}} alt = {name}/>
         <p style = {{fontSize : 16, fontWeight : '500', marginBottom : '0',}}>{name}</p>
         <p style = {{marginBottom : 0}}>{character}</p>
       </div>

@@ -103,7 +103,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    document.title = 'Mr Movie | Home';
+    document.title = 'Movie Madness | Home';
   }
 
 

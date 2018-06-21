@@ -6,37 +6,55 @@ import DrPagination from '../components/DrPagination';
 import Filter from '../components/Filter';
 import Footer from '../components/Footer';
 import { Layout, Divider, Icon, Spin, Row } from 'antd';
+import { FETCHED_MOVIES } from '../constants';
 
 
 //Home component 
 class Movies extends Component {
   constructor(){
     super();
-    document.title = 'Mr Movie | Movies'
+    document.title = 'Movie Madness | Movies'
+    this.state = {
+      page : 1,
+      url : null
+    }
   }
   
   //make request before the render method is invoked
   componentWillMount(){
-    //url
+    //url movie
     const discoverUrlMovies = 'https://api.themoviedb.org/3/discover/movie?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1';
     //requests 
-    this.fetchMovie(discoverUrlMovies);
+    this.fetchMovie(discoverUrlMovies, FETCHED_MOVIES);
   }
 
-  fetchMovie = (url) => {
-    this.props.APIRequest(url, 'FETCHED_MOVIES');
+  fetchMovie = (url, type) => {
+    this.props.APIRequest(url, type);
   }
 
   //handle the new filter url
   handleFilter = (url) =>{
-    this.fetchMovie(url);
+    this.setState({
+      url : url,
+      page : 1
+    }, () => this.fetchMovie(this.state.url, FETCHED_MOVIES));
   }
 
 
   //handle Page
   handleChangePageMovie = (page) =>{
-    const url = 'https://api.themoviedb.org/3/discover/movie?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + page;  
-    this.fetchMovie(url);
+    console.log(this.state);
+    let url;
+    this.setState({
+      page : page
+    });
+    if(this.state.url === null){
+      url = 'https://api.themoviedb.org/3/discover/movie?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + page;
+    }else{
+      url = this.state.url + '&page=' + page;
+    }
+    console.log('Url in handle page', url);
+    this.fetchMovie(url, FETCHED_MOVIES);
   }
 
   //render
@@ -62,7 +80,7 @@ class Movies extends Component {
         </div>
         <Divider />
         <Layout style = {{display : 'flex', flexDirection : 'column', alignContent : 'flex-start', paddingBottom : '2rem'}}>
-          <Filter url = {this.handleFilter} />
+          <Filter type = 'movie' url = {this.handleFilter} />
           <Row type = 'flex' style = { styles.row }>
             {displayMovies}
           </Row>

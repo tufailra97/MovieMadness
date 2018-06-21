@@ -13,7 +13,7 @@ class OverviewSerie extends Component {
   constructor(){
     super(); 
 
-    document.title = 'Mr Movie | Overview ';
+    document.title = 'Movie Madness | Overview ';
     this.state = { 
       visible: false,
     }
@@ -181,8 +181,6 @@ class OverviewSerie extends Component {
     let displayCasts;                                                                         //credits
     let displayDirector;                                                                      //director
     let comma;
-    console.log('props in series', this.props);
-    console.log('overview', suggetions);
     
     //if trailer && suggestions && credits === undefined || null
     if(trailer === undefined || trailer === null){
@@ -207,7 +205,7 @@ class OverviewSerie extends Component {
     if(suggetions === undefined || suggetions === null){
       displaySuggestion = <Spin indicator={<Icon type="loading" style={{ margin : 40,fontSize: 50 }} spin />}/>;
     }else if(suggetions.results === undefined || suggetions.results.length === 0 ){
-      displaySuggestion = <span>No suggestions</span>
+      displaySuggestion = <span>No related eries were found</span>
     }else if(suggetions.results.length > 0){
       if(suggetions.results.length > 10){
         displaySuggestion = suggetions.results.slice(0,6).map((s) => {
@@ -385,7 +383,7 @@ class OverviewSerie extends Component {
         <Divider />
         <div className='suggestion'>
           <Layout style = {{padding : '1rem'}}>   
-            <h1>Related Movies</h1>
+            <h1>Related Series</h1>
             <Row type = 'flex' gutter = {8} style = {{flexWrap : 'wrap', justifyContent : 'flex-start'}}>
               {displaySuggestion}
             </Row>

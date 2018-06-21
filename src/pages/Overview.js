@@ -13,7 +13,7 @@ class OverviewMovie extends Component {
   constructor(){
     super(); 
 
-    document.title = 'Mr Movie | Overview ';
+    document.title = 'Movie Madness | Overview ';
     this.state = { 
       visible: false,
     }
@@ -91,7 +91,7 @@ class OverviewMovie extends Component {
   handleGenre = (gen) =>{
 
     if(gen === undefined){
-      return 'No genre is available';
+      return 'No genre was found';
     }
     //get the generes
     const newGen = gen.map((g) => {
@@ -105,27 +105,30 @@ class OverviewMovie extends Component {
   //handle budget && revenue
   handleMoney = (money) =>{
     if(money === undefined || null){
-      return 'Loading';
+      return 'Data not available';
     }
     return <CurrencyFormat value={money} displayType={'text'} thousandSeparator={true} prefix={'$'} />;
   }
 
   //handle companies
   handleProductionCompanies = (companies) =>{
+    console.log('companies', companies);
     if(companies === undefined){
-      return null;
+      return 'No production company was found';
     }
     const comp = companies.map((c) => {
+      console.log('company ',c.name);
       return c.name;
     });
 
     let allCompanies;
-    if(comp.length > 3){
-      allCompanies = comp.slice(0,3).join(', ');
+    if(comp.length > 1){
+      allCompanies = comp.slice(0,2).join(' & ');
     }else{
-      allCompanies = comp.join(', ');
+      allCompanies = comp;
     }
 
+    console.log('all comp', allCompanies);
     return allCompanies;
   }
 
@@ -137,7 +140,6 @@ class OverviewMovie extends Component {
   }
 
   componentDidUpdate(prevProps){
-    console.log('state, ' , this.props.history.location.state);
 
     if(prevProps.movie.overview.id !== this.props.movie.overview.id){
       const id = this.props.movie.overview.id;
@@ -163,6 +165,7 @@ class OverviewMovie extends Component {
     let displayDirector;                                                                      //director
     let comma;
 
+    
     //if trailer && suggestions && credits === undefined || null
     if(trailer === undefined || trailer === null){
       displayTrailer = (
@@ -186,7 +189,7 @@ class OverviewMovie extends Component {
     if(suggetions === undefined || suggetions === null){
       displaySuggestion = <Spin indicator={<Icon type="loading" style={{ margin : 40,fontSize: 50 }} spin />}/>;
     }else if(suggetions.results === undefined || suggetions.results.length === 0 ){
-      displaySuggestion = <span>No suggestions</span>
+      displaySuggestion = <span>No related movies were found</span>
     }else if(suggetions.results.length > 0){
       if(suggetions.results.length > 10){
         displaySuggestion = suggetions.results.slice(0,6).map((s) => {
@@ -219,23 +222,29 @@ class OverviewMovie extends Component {
 
     //get credits and director
     if(credits === undefined || credits === null){
-      displayCasts = <p>Loading</p>
+      displayCasts = <p>No cast available</p>
+      displayDirector = <p>Director was not found</p>
     }else{
       if(credits.cast.length === 0){
-        displayCasts = <p>no cast is available</p>
+        displayCasts = <p>No cast was found</p>
       }else{
+        const directors = credits.crew.filter((crew) => {
+          if(crew.job === 'Director'){
+            return crew;
+          }
+        });
+        
+        console.log('director === ', directors);
+        if(directors.length === 0){
+          displayDirector = <p>Data not available</p>
+        }else{
+          const tempDirector = directors.map((director) => {
+            return director.name;
+          });
+          displayDirector = tempDirector.join(' & ');
+        }
+
         if(credits.cast.length >= 15){
-
-          const directors = credits.crew.filter((crew) => {
-            if(crew.job === 'Director'){
-              return <span key = {crew.id}>{crew.name}</span>;
-            }
-          });
-
-          displayDirector = directors.map((d, index) => {
-            return <span key = {d.id}>{d.name + comma}</span>
-          });
-
           displayCasts = credits.cast.slice(0,15).map((c, index) => {
             comma = ',';
             if(index === 14){
@@ -276,7 +285,7 @@ class OverviewMovie extends Component {
         <div className = 'overview'>
           <Layout className = 'overview-media'>
             <div>
-              <img className = 'overview-image' src = { imageUrl } alt = {overview.title}/>
+              <img className = 'overview-image' src = { overview.profile_path === null || overview.poster_path === undefined ? require('../asset/image_not_found.jpg') : imageUrl } alt = {overview.title}/>
             </div> 
           </Layout>
           <Layout className = 'overview-description'>
@@ -329,15 +338,15 @@ class OverviewMovie extends Component {
               </div>
               <div style = { styles.overview }>
                 <h2 style = { styles.type }>Run Time</h2>
-                <p>{overview.runtime} mins.</p>
+                <p>{overview.runtime !== undefined && overview.runtime !== null ? overview.runtime + ' mins' : 'Run time not available'}</p>
               </div>
               <div style = { styles.overview }>
                 <h2 style = { styles.type }>Directed By</h2>
-                <p>{displayDirector}</p>
+                {displayDirector}
               </div>
               <div styles = { styles.overview }>
                 <h2 style = { styles.type }>Cast</h2>
-                <div style = {{display : 'flex', justifyContent : 'flex-start', alignItems : 'center', flexWrap : 'wrap', overflow : 'hidden', width : '90%', marginBottom : 10}}>
+                <div style = {{display : 'flex', justifyContent : 'flex-start', alignItems : 'center', flexWrap : 'wrap', width : '90%'}}>
                   {displayCasts}
                 </div>
               </div>
@@ -424,6 +433,9 @@ const styles = {
     flexDirection: 'column',
     justifyContent : 'center',
     borderRadius : 5,
+  },
+  overview : {
+    marginBottom : 10
   }
 };
 

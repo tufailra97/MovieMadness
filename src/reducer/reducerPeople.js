@@ -1,4 +1,4 @@
-import { BEGIN_FETCH, PEOPLE, FETCH_FAILED } from '../constants';
+import { BEGIN_FETCH, FETCH_FAILED, OVERVIEW_PEOPLE } from '../constants';
 
 //initial state
 const initialState = {
@@ -20,7 +20,7 @@ export default (state = initialState, actions) =>{
         ...state,
         failed : true
       };
-    case PEOPLE:
+    case OVERVIEW_PEOPLE:
       return {
         ...state,
         results : actions.payload
