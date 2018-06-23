@@ -67,7 +67,7 @@ class Search extends Component {
         )
       }else{
         displayResuts = (
-          <Row type = 'flex' style = {{flexWrap : 'wrap', justifyContent : 'center'}}>
+          <Row type = 'flex' style = {{flexWrap : 'wrap', justifyContent : 'center', marginTop : 20}}>
             {search.results.map((r)=> {
               let poster;
               let button;
@@ -121,7 +121,7 @@ class Search extends Component {
             placeholder="Search movie, tv-show or a person"
             onSearch={value => {this.handleSearch(value)}}
             enterButton
-            style={{ width: '60%', outline : 'none', margin : '0 auto'}}
+            style={{ width: '60%', outline : 'none', margin : '0 auto', outlineColor : 'grey'}}
           />
           {displayResuts}
         </Layout>
