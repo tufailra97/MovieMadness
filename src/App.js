@@ -19,13 +19,14 @@ import OverviewPerson from './pages/OverviewPerson';
 
 class App extends Component {
   render() {
+    console.log('public url',process.env.PUBLIC_URL);
     return (
-      <Router>
+      <Router basename = {process.env.PUBLIC_URL}>
         <Layout>
           <SideBar />
           <Layout style={{marginLeft : 80, padding : 15, backgroundColor : 'white', height : '100vh'}}>
             <Switch>
-              <Route exact path='/' component = {Home}/>
+              <Route exact path={process.env.PUBLIC_URL + '/'} component = {Home}/>
               <Route path='/movies' component = {Movies}/>
               <Route path='/series' component = {Series}/>
               <Route path='/search' component = {Search}/>
