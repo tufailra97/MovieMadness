@@ -148,7 +148,7 @@ class Home extends Component {
     
     return (
       <div>
-        <Carousel>
+        <Carousel autoplay>
           {careDiv}
         </Carousel>
         <Divider />

@@ -13,7 +13,7 @@ class Series extends Component {
   constructor(){
     super();
 
-    document.title = 'Mr Movie | Series';
+    document.title = 'Movie Madness | Series';
     this.state = {
       url : null,
       page : 1,

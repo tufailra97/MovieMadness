@@ -26,10 +26,10 @@ class App extends Component {
           <SideBar />
           <Layout style={{marginLeft : 80, padding : 15, backgroundColor : 'white', height : '100vh'}}>
             <Switch>
-              <Route exact path="/" render={() => (
-                  <Redirect to={process.env.PUBLIC_URL + "/home"}/>
+              <Route exact path='/' render={() => (
+                  <Redirect to={'/home'}/>
               )}/>
-              <Route exact path={process.env.PUBLIC_URL + '/home'} component = {Home}/>
+              <Route path={process.env.PUBLIC_URL + '/home'} component = {Home}/>
               <Route path={process.env.PUBLIC_URL + '/movies'} component = {Movies}/>
               <Route path={process.env.PUBLIC_URL + '/series'} component = {Series}/>
               <Route path={process.env.PUBLIC_URL + '/search'} component = {Search}/>
