@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Cast from '../components/Cast';
 import Suggestions from '../components/Suggestions';
 import Footer from '../components/Footer';
@@ -120,6 +119,7 @@ class OverviewMovie extends Component {
     });
 
     let allCompanies;
+
     if(comp.length > 1){
       allCompanies = comp.slice(0,2).join(' & ');
     }else{
@@ -143,9 +143,10 @@ class OverviewMovie extends Component {
 
   //overview
   overview = (id, name) =>{
+    let newName = name.replace(/\s/g,'');
     const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
     this.props.APIRequest(url, 'OVERVIEW_MOVIE');
-    this.props.history.replace('./' + id + '+' + name, [{id : id}]);
+    this.props.history.replace('./' + newName, [{id : id}]);
   }
 
   componentDidUpdate(prevProps){
@@ -239,6 +240,8 @@ class OverviewMovie extends Component {
         const directors = credits.crew.filter((crew) => {
           if(crew.job === 'Director'){
             return crew;
+          }else {
+            return null;
           }
         });
         

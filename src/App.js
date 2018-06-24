@@ -26,17 +26,17 @@ class App extends Component {
           <SideBar />
           <Layout style={{marginLeft : 80, padding : 15, backgroundColor : 'white', height : '100vh'}}>
             <Switch>
-              <Route exact path={process.env.PUBLIC_URL + '/' }render={() => (
+              <Route exact path={'/'} render={() => (
                   <Redirect to={'/home'}/>
               )}/>
-              <Route path={process.env.PUBLIC_URL + '/home'} component = {Home}/>
-              <Route path={process.env.PUBLIC_URL + '/movies'} component = {Movies}/>
-              <Route path={process.env.PUBLIC_URL + '/series'} component = {Series}/>
-              <Route path={process.env.PUBLIC_URL + '/search'} component = {Search}/>
-              <Route path={process.env.PUBLIC_URL + '/overview/:item'} component = {Overview}/> 
-              <Route path={process.env.PUBLIC_URL + '/overviewSerie'} component = {OverviewSeries} />
-              <Route path={process.env.PUBLIC_URL + '/overviewPerson'} component = {OverviewPerson} />
-              <Route path={process.env.PUBLIC_URL + '*'}  component = {ErrorPage}/>
+              <Route path={'/home'} component = {Home}/>
+              <Route path={'/movies'} component = {Movies}/>
+              <Route path={'/series'} component = {Series}/>
+              <Route path={'/search'} component = {Search}/>
+              <Route path={'/overview/:item'} component = {Overview}/> 
+              <Route path={'/overviewSerie'} component = {OverviewSeries} />
+              <Route path={'/overviewPerson'} component = {OverviewPerson} />
+              <Route path={'*'}  component = {ErrorPage}/>
             </Switch>
           </Layout>
         </Layout>

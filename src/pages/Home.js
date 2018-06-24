@@ -6,7 +6,7 @@ import DisplayItemSerie from '../components/DisplayItemSerie';
 import DrPagination from "../components/DrPagination";
 import Footer from '../components/Footer';
 import { Layout, Divider, Icon, Spin, Row, Carousel } from 'antd';
-import { NOW_UPCOMING_MOVIE, FETCHED_MOVIES, FETCHED_SERIES } from '../constants';
+import { NOW_UPCOMING_MOVIE, FETCHED_MOVIES, FETCHED_SERIES, OVERVIEW_MOVIE } from '../constants';
 
 
 //Home component 
@@ -97,9 +97,10 @@ class Home extends Component {
   overview = (id, name) =>{
     let newName = name.replace(/\s/g,'');
     const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
-    this.props.APIRequest(url, 'OVERVIEW_MOVIE');
-    this.props.history.push('./overview/' + id + newName, [{id : id}]);
+    this.props.APIRequest(url, OVERVIEW_MOVIE);
+    this.props.history.push('./overview/' + newName, [{id : id}]);
   }
+
 
   componentDidMount(){
     document.title = 'Movie Madness | Home';
