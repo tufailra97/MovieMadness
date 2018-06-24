@@ -25,10 +25,12 @@ class SideBar extends Component {
           style = {{overflow: 'auto', height: '100vh', position: 'fixed', left: 0, zIndex : '1'}}
           width = '150px'
         >
-          <div className="logo">
-            <img src = {require('../asset/logo.svg')}/>
-            <span className = {this.state.collapsed === false? 'name' : 'name-hide' }>Mr Movie</span>
-          </div>
+          <NavLink to = '/'>
+            <div className="logo">
+              <img src = {require('../asset/logo.svg')} alt = 'MovieMadness'/>
+              <span className = {this.state.collapsed === false? 'name' : 'name-hide' }>MovieMadness</span>
+            </div>
+          </NavLink>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">
               <NavLink to='/'>

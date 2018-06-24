@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Select, Button, Divider, InputNumber } from 'antd';
+import { Row, Col, Select, Button, InputNumber } from 'antd';
 
 //official genres by movie db
 const genres = [
@@ -114,15 +114,15 @@ class Filter extends Component {
 
     let url;
 
-    if( genre.length === 0 && year === "" ){
+    if( genre.length === 0 && year === '' ){
       return alert('No filter is selected');
     }else{
       this.setState({
         filter : true
       });
-      if(type == 'movie'){
+      if(type === 'movie'){
         url = 'https://api.themoviedb.org/3/discover/movie?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
-      }else if(type == 'tv'){
+      }else if(type === 'tv'){
         url = 'https://api.themoviedb.org/3/discover/tv?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false';
       }
       let genreList = '';
@@ -143,8 +143,6 @@ class Filter extends Component {
   }
   
   render() {
-    const {filter} = this.state;
-    let header;
     const displayGenres = genres.map((genre) => {
       return (
         <Select.Option key = { genre.id }>{genre.name}</Select.Option>
@@ -154,7 +152,7 @@ class Filter extends Component {
     return (
       <div style = {{margin : '2rem 0 1rem 0'}}>
         <Row type = 'flex' align = 'middle' justify = 'center' gutter = {18}>
-          <Col md = {4}>
+          <Col md = {4} xs = {16}>
             <Select
               mode = 'tags'
               maxTagCount = {1} 
@@ -166,7 +164,7 @@ class Filter extends Component {
               {displayGenres}
             </Select>
           </Col>
-          <Col md = {3} style = {{textAlign : 'center'}}>
+          <Col md = {3} xs = {16} style = {{textAlign : 'center'}}>
             <InputNumber 
               style = {{width : '100%'}}
               min = {1920} 
@@ -175,7 +173,7 @@ class Filter extends Component {
               onChange = {this.handleYear}
             />
           </Col>
-          <Col md = {3}>
+          <Col md = {3} xs = {16}>
             <Button className = 'filter' icon = 'filter' type = 'ghost' onClick = {this.handleFilter} style = {{borderRadius : 25, borderColor : 'rgba(0, 0, 0, 0.65)'}}>Filter</Button>
           </Col>
         </Row>

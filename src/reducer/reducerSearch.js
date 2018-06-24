@@ -1,4 +1,4 @@
-import { SEARCH, BEGIN_FETCH, FETCH_FAILED, SEARCH_PEOPLE, SEARCH_MOVIES, SEARCH_SERIES } from '../constants';
+import { SEARCH, BEGIN_FETCH, FETCH_FAILED } from '../constants';
 
 //initial state
 const initialState = {

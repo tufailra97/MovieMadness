@@ -5,9 +5,8 @@ import Cast from '../components/Cast';
 import Suggestions from '../components/Suggestions';
 import Footer from '../components/Footer';
 import { APIRequest } from '../actions';
-import CurrencyFormat from 'react-currency-format';
 import { FETCH_TRAILER, SERIE_SEGGESTION, SERIE_CREDITS, OVERVIEW_SERIE } from '../constants';
-import { Card, Layout, Divider, Button, Icon, Modal, Spin, Tooltip, Row, Col, Popover } from 'antd';
+import {Layout, Divider, Button, Icon, Modal, Spin, Tooltip, Row, Col } from 'antd';
 
 class OverviewSerie extends Component {  
   constructor(){
@@ -198,7 +197,7 @@ class OverviewSerie extends Component {
         </div>
       );
     }else if(trailer.results.length > 0 && this.state.visible === true){
-      displayTrailer = <iframe width = '98%' height = '100%' src = {'https://www.youtube.com/embed/' + trailer.results[0].key} />
+      displayTrailer = <iframe width = '98%' height = '100%' src = {'https://www.youtube.com/embed/' + trailer.results[0].key} title = {trailer.id} />
     }
 
     //get suggestions
@@ -248,7 +247,8 @@ class OverviewSerie extends Component {
           const directors = credits.crew.filter((crew) => {
             if(crew.job === 'Director'){
               return <span key = {crew.id}>{crew.name}</span>;
-            }
+            }else 
+              return null;
           });
 
           displayDirector = directors.map((d, index) => {

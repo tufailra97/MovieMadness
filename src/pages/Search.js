@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { APIRequest } from '../actions';
 import Footer from '../components/Footer';
-import { Layout, Input, Button, Card, Row, Col, Divider, Icon } from 'antd';
 import { SEARCH, OVERVIEW_PEOPLE, OVERVIEW_SERIE, OVERVIEW_MOVIE } from '../constants';
+import { Layout, Input, Card, Row, Col, Divider, Icon } from 'antd';
 
 
 
@@ -26,19 +26,23 @@ class Search extends Component {
   }
 
   handleOverview = (id, name, type) => {
+    let newName = name.replace(/\s/g,'');
     switch(type){
       case 'movie' :
-        const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
-        this.props.APIRequest(url, OVERVIEW_MOVIE);
-        this.props.history.push(this.props.history.push('./overview/' + id + name, [{id}]));
+          const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
+          this.props.APIRequest(url, OVERVIEW_MOVIE);
+          this.props.history.push(this.props.history.push('./overview/' + id + newName, [{id}]));
+        break;
       case 'tv' : 
-          const urlSerie = 'https://api.themoviedb.org/3/tv/'+ id +'?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
-          this.props.APIRequest(urlSerie, OVERVIEW_SERIE);
-          this.props.history.push(this.props.history.push('./overviewSerie/' + id + name, [{id}]));
-      case 'person' : 
-          const urlPerson = 'https://api.themoviedb.org/3/person/'+ id +'?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
-          this.props.APIRequest(urlPerson, OVERVIEW_PEOPLE);
-          this.props.history.push(this.props.history.push('./overviewPerson/' + id + name, [{id}]));
+            const urlSerie = 'https://api.themoviedb.org/3/tv/'+ id +'?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
+            this.props.APIRequest(urlSerie, OVERVIEW_SERIE);
+            this.props.history.push(this.props.history.push('./overviewSerie/' + id + newName, [{id}]));
+            break;
+            case 'person' : 
+            const urlPerson = 'https://api.themoviedb.org/3/person/'+ id +'?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
+            this.props.APIRequest(urlPerson, OVERVIEW_PEOPLE);
+            this.props.history.push(this.props.history.push('./overviewPerson/' + id + newName, [{id}]));
+          break;
       default : 
         return null
     }
@@ -51,9 +55,7 @@ class Search extends Component {
   render() {
     const {results} = this.props;
     let displayResuts;
-    
-    console.log('results ',results);
-    
+      
     if(this.state.search === false){
       displayResuts = <h1 style = {{ fontSize : '3rem', textAlign : 'center', marginTop : '3.5rem'}}>Search to see results</h1>
     }else{
@@ -70,7 +72,6 @@ class Search extends Component {
           <Row type = 'flex' style = {{flexWrap : 'wrap', justifyContent : 'center', marginTop : 20}}>
             {search.results.map((r)=> {
               let poster;
-              let button;
               let title;
               if(r.media_type === 'movie'){
                 if(r.poster_path === null){
@@ -100,7 +101,7 @@ class Search extends Component {
                     bodyStyle = {{padding : 15}}
                     className = 'item'
                     hoverable = {true}
-                    onClick = {()=> this.handleOverview(r.id, r.name, r.media_type)}
+                    onClick = {()=> this.handleOverview(r.id, title, r.media_type)}
                     cover = {poster}
                   >
                     <Card.Meta

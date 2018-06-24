@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { Layout, Button } from 'antd';
 
 export default class ErrorPage extends Component {
-  constructor(){
-    super();
-    
+  componentWillMount() {
+    document.title = 'Movie Madness | Error';
   }
 
   render() {
-    console.log(this.props);
     return (
       <Layout 
         style = { styles.container }>

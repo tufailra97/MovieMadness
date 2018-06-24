@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actionSearchMovie, actionSearchSerie, APIRequest } from '../actions'
+import { APIRequest } from '../actions'
 import DisplayItemMovie from '../components/DisplayItemMovie';
 import DisplayItemSerie from '../components/DisplayItemSerie'; 
-import Upcoming from '../components/Upcoming';
 import DrPagination from "../components/DrPagination";
 import Footer from '../components/Footer';
-import { Layout, Divider, Icon, Spin, Row, Carousel, Card } from 'antd';
-import { NOW_UPCOMING_MOVIE, OVERVIEW_MOVIE, FETCHED_MOVIES, FETCHED_SERIES } from '../constants';
+import { Layout, Divider, Icon, Spin, Row, Carousel } from 'antd';
+import { NOW_UPCOMING_MOVIE, FETCHED_MOVIES, FETCHED_SERIES } from '../constants';
 
 
 //Home component 
@@ -85,7 +84,6 @@ class Home extends Component {
 
   //handle pagination 
   handleChangePageMovie = (page) =>{
-    console.log('page in home', page);
     const url = 'https://api.themoviedb.org/3/discover/movie?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=' + page;
 
     this.fetchMovie(url, NOW_UPCOMING_MOVIE);
@@ -109,18 +107,16 @@ class Home extends Component {
 
   //render
   render() {
-    const movies = this.props.movies.results;             //movies
+    const movies = this.props.movies.results;                      //movies
     const upcoming = this.props.movies.upcoming.results;           //upcoming movie
-    const series = this.props.series.results;             //series
-    let displayMovies;           //display movies
-    let displayUpcoming;
+    const series = this.props.series.results;                      //series
+    let displayUpcoming;         //display upcoming
     let displaySeries;           //display series
     let careDiv;
     const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;          //spinner
-    console.log('this.props in home ', upcoming);
+
     //if movies and series is undefined, display a spinner
     if(movies.results === undefined || upcoming === undefined){
-      displayMovies = <Spin indicator={antIcon} />
       careDiv = <Spin indicator={antIcon} />
       displayUpcoming = null;
     }else {
@@ -131,7 +127,7 @@ class Home extends Component {
       careDiv = movies.results.slice(0,10).map((movie) => {
         return(
           <div key = {movie.id} style = {{position : 'relative', overflow : 'hidden'}}>
-            <img style = {{width : '100vw'}} src = {'https://image.tmdb.org/t/p/w1280/' + movie.backdrop_path} />
+            <img style = {{width : '100vw'}} src = {'https://image.tmdb.org/t/p/w1280/' + movie.backdrop_path} alt = {movie.title} />
             <div style = {{position : 'absolute', bottom : '20%', marginLeft: 20, textTransform : 'uppercase', borderRadius : 2, }}>
               <h1 className = 'caresoul-title'>{movie.title}</h1>
               <button className = 'overview-button' onClick = {() => this.overview(movie.id, movie.title)}><span style = {{padding : '0.4rem 0.5rem', borderRight : '2px solid rgba(255,255,255, 0.8)'}}>Overview</span><span style = {{padding : '0.4rem 0.1rem'}}><Icon type='right'/></span></button>

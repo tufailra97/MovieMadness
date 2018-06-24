@@ -6,8 +6,8 @@ import Suggestions from '../components/Suggestions';
 import Footer from '../components/Footer';
 import { APIRequest } from '../actions';
 import CurrencyFormat from 'react-currency-format';
-import { MOVIE_SUGGESTION, FETCH_TRAILER, MOVIE_CREDITS, CAST_MOVIE } from '../constants';
-import { Card, Layout, Divider, Button, Icon, Modal, Spin, Tooltip, Row, Col, Popover } from 'antd';
+import { MOVIE_SUGGESTION, FETCH_TRAILER, MOVIE_CREDITS } from '../constants';
+import { Layout, Divider, Button, Icon, Modal, Spin, Tooltip, Row, Col } from 'antd';
 
 class OverviewMovie extends Component {  
   constructor(){
@@ -112,12 +112,10 @@ class OverviewMovie extends Component {
 
   //handle companies
   handleProductionCompanies = (companies) =>{
-    console.log('companies', companies);
     if(companies === undefined){
       return 'No production company was found';
     }
     const comp = companies.map((c) => {
-      console.log('company ',c.name);
       return c.name;
     });
 
@@ -128,8 +126,19 @@ class OverviewMovie extends Component {
       allCompanies = comp;
     }
 
-    console.log('all comp', allCompanies);
     return allCompanies;
+  }
+
+  handleCast = (c, comma) => {
+    return( 
+      <Cast 
+        key = {c.id}
+        image = {c.profile_path} 
+        name = {c.name} 
+        id = {c.id}
+        comma = {comma}
+        character = {c.character}/>
+    )
   }
 
   //overview
@@ -151,9 +160,7 @@ class OverviewMovie extends Component {
       this.props.APIRequest(urlCredit, MOVIE_CREDITS);
     }
   }
-  
-  handle
-  
+
   
   
   render() {
@@ -183,14 +190,14 @@ class OverviewMovie extends Component {
         </div>
       );
     }else if(trailer.results.length > 0 && this.state.visible === true){
-      displayTrailer = <iframe width = '98%' height = '100%' src = {'https://www.youtube.com/embed/' + trailer.results[0].key} />
+      displayTrailer = <iframe width = '98%' height = '100%' src = {'https://www.youtube.com/embed/' + trailer.results[0].key} title = {trailer.id}/>
     }
 
     //get suggestions
     if(suggetions === undefined || suggetions === null){
       displaySuggestion = <Spin indicator={<Icon type="loading" style={{ margin : 40,fontSize: 50 }} spin />}/>;
     }else if(suggetions.results === undefined || suggetions.results.length === 0 ){
-      displaySuggestion = <span>No related movies were found</span>
+      displaySuggestion = <span>No suggestion was found</span>
     }else if(suggetions.results.length > 0){
       if(suggetions.results.length > 10){
         displaySuggestion = suggetions.results.slice(0,6).map((s) => {
@@ -235,7 +242,6 @@ class OverviewMovie extends Component {
           }
         });
         
-        console.log('director === ', directors);
         if(directors.length === 0){
           displayDirector = <p>Data not available</p>
         }else{
@@ -251,15 +257,7 @@ class OverviewMovie extends Component {
             if(index === 14){
               comma = '.';
             }
-            return(
-              <Cast 
-                key = {c.id}
-                image = {c.profile_path} 
-                name = {c.name} 
-                id = {c.id}
-                comma = {comma}
-                character = {c.character}/>
-            );
+            return this.handleCast(c, comma);
           });
         }else{
           displayCasts = credits.cast.map((c, index) => {
@@ -267,15 +265,7 @@ class OverviewMovie extends Component {
             if(index === 14){
               comma = '.';
             }
-            return(
-              <Cast 
-                key = {c.id}
-                image = {c.profile_path} 
-                name = {c.name} 
-                id = {c.id}
-                comma = {comma}
-                character = {c.character}/>
-            );
+            return this.handleCast(c, comma);
           });
         }
       }

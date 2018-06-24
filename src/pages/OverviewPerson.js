@@ -66,7 +66,6 @@ class OverviewPerson extends Component {
       return <p>Data not found</p>;
     }else{
 
-      console.log('also know ===', e);
       const knowAs = (
         <Card bodyStyle = {{padding : '0', background : '#F0F2F5'}} bordered = {false}>
           {
@@ -77,9 +76,7 @@ class OverviewPerson extends Component {
         </Card>
       )
       
-      
-      console.log(knowAs);
-      
+          
       return (
         <div styles = { styles.overview }>
           <h2 style = { styles.type }>Also know as</h2>
@@ -119,7 +116,6 @@ class OverviewPerson extends Component {
     const alsoKnown = this.handleAlsoKnow(person.also_known_as);
     const homePage = this.handleHomepage(person.homepage);
     const death = this.handleDeath(person.deathday);
-    console.log('people in person', person);
     return (
       <div style = {{maxWidth : 2160, margin : '0 auto', width : '100%'}}>
         <div className = 'overview'>
