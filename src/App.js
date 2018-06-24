@@ -20,7 +20,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <Router basename = {process.env.PUBLIC_URL}>
+      <Router>
         <Layout>
           <SideBar />
           <Layout style={{marginLeft : 80, padding : 15, backgroundColor : 'white', height : '100vh'}}>
