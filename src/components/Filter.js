@@ -152,7 +152,7 @@ class Filter extends Component {
     return (
       <div style = {{margin : '2rem 0 1rem 0'}}>
         <Row type = 'flex' align = 'middle' justify = 'center' gutter = {18}>
-          <Col md = {4} xs = {16}>
+          <Col md = {6} xs = {16}>
             <Select
               mode = 'tags'
               maxTagCount = {1} 

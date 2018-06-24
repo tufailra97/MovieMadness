@@ -30,13 +30,13 @@ class App extends Component {
                   <Redirect to={process.env.PUBLIC_URL + "/home"}/>
               )}/>
               <Route exact path={process.env.PUBLIC_URL + '/home'} component = {Home}/>
-              <Route path='/movies' component = {Movies}/>
-              <Route path='/series' component = {Series}/>
-              <Route path='/search' component = {Search}/>
-              <Route path='/overview/:item' component = {Overview}/> 
-              <Route path='/overviewSerie' component = {OverviewSeries} />
-              <Route path='/overviewPerson' component = {OverviewPerson} />
-              <Route path='*'  component = {ErrorPage}/>
+              <Route path={process.env.PUBLIC_URL + '/movies'} component = {Movies}/>
+              <Route path={process.env.PUBLIC_URL + '/series'} component = {Series}/>
+              <Route path={process.env.PUBLIC_URL + '/search'} component = {Search}/>
+              <Route path={process.env.PUBLIC_URL + '/overview/:item'} component = {Overview}/> 
+              <Route path={process.env.PUBLIC_URL + '/overviewSerie'} component = {OverviewSeries} />
+              <Route path={process.env.PUBLIC_URL + '/overviewPerson'} component = {OverviewPerson} />
+              <Route path={process.env.PUBLIC_URL + '*'}  component = {ErrorPage}/>
             </Switch>
           </Layout>
         </Layout>
