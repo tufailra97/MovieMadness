@@ -11,6 +11,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect
 } from 'react-router-dom';
 
 import './App.css';
@@ -19,14 +20,16 @@ import OverviewPerson from './pages/OverviewPerson';
 
 class App extends Component {
   render() {
-    console.log('public url',process.env.PUBLIC_URL);
     return (
       <Router basename = {process.env.PUBLIC_URL}>
         <Layout>
           <SideBar />
           <Layout style={{marginLeft : 80, padding : 15, backgroundColor : 'white', height : '100vh'}}>
             <Switch>
-              <Route exact path={process.env.PUBLIC_URL + '/'} component = {Home}/>
+              <Route exact path="/" render={() => (
+                  <Redirect to={process.env.PUBLIC_URL + "/home"}/>
+              )}/>
+              <Route exact path={process.env.PUBLIC_URL + '/home'} component = {Home}/>
               <Route path='/movies' component = {Movies}/>
               <Route path='/series' component = {Series}/>
               <Route path='/search' component = {Search}/>
