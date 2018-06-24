@@ -95,9 +95,10 @@ class Home extends Component {
   }
 
   overview = (id, name) =>{
+    let newName = name.replace(/\s/g,'');
     const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=72049b7019c79f226fad8eec6e1ee889&language=en-US';
     this.props.APIRequest(url, 'OVERVIEW_MOVIE');
-    this.props.history.push('./overview/' + id + name, [{id}]);
+    this.props.history.push('./overview/' + id + newName, [{id : id}]);
   }
 
   componentDidMount(){
